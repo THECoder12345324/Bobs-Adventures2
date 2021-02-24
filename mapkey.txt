@@ -6,3 +6,6 @@
 6 = Middle Bottom Flag
 7 = Right Bottom Flag
 8 = Middle Flag
+
+E = enemy
+W = wood

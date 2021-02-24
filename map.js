@@ -15,6 +15,7 @@ class Map {
         this.images = [this.image1, this.image2, this.image3];
 
         this.enemies = [];
+        this.materials = [];
     }
     loadMap() {
         //this.map = loadStrings(this.file);
@@ -85,6 +86,14 @@ class Map {
                         enemy.display();
                         this.enemies.push(enemy);
                     }
+                    if (this.map[i][j] == 'W') {
+                        var sprite = createSprite(j * TILESIZE, i * TILESIZE, TILESIZE, TILESIZE);
+                        sprite.visible = false;
+                        var wood = new Material('W', j * TILESIZE, i * TILESIZE, TILESIZE, TILESIZE);
+                        wood.display();
+                        this.materials.push(wood);
+                        materialGroup.add(sprite);
+                    }
                 }
             }
             console.log("Drawed");
@@ -93,6 +102,9 @@ class Map {
     update() {
         for (var i = 0; i < this.enemies.length; i++) {
             this.enemies[i].display();
+        }
+        for (var j = 0; j < this.materials.length; j++) {
+            this.materials[j].display();
         }
     }
 
