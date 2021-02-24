@@ -32,6 +32,9 @@ var y4;
 var x5;
 var y5;
 
+var woodCount = 0;
+var addWood = 0;
+
 var lerpr = false;
 var lerpl = false;
 
@@ -65,8 +68,14 @@ function setup() {
 
 function draw() {
     background(255);
+
+    if (woodCount < addWood) {
+        woodCount += 1;
+    }
+
     if (gamestate == "start") {
         push();
+        pin.visible = true;
         image(world1, 0, 0, width, height + displayHeight / 2.25);
 
         x1 = (displayWidth - 100) / 4.58;
@@ -270,9 +279,12 @@ function draw() {
             }
         }
         camera.zoom = 2;
+        textSize(20);
+        text("Wood: " + woodCount, 10 + (pin.x - width / 4), 20 + (pin.y - height / 4));
         pop();
     }
     if (gamestate == "play") {
+        pin.visible = false;
         camera.zoom = 1;
         camera.position.x = width / 2;
         camera.position.y = height / 2;
@@ -365,14 +377,21 @@ function draw() {
 
         bob.velocityX = 0;
         if (bob.isTouching(groundGroup)) {
-            bob.velocityX = 10;
             bob.velocityY = 0;
+            bob.velocityX = 10;
         }
         else {
             bob.velocityY = 4;
         }
+        if (bob.isTouching(flagpoleGroup)) {
+            bob.velocityY = 4;
+        }
+        else {
+            bob.velocityX = 10;
+        }
 
         if (bob.isTouching(materialGroup)) {
+            addWood += 25;
             gamestate = "start";
             if (level == 1) {
                 pin.x = x1;
