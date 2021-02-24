@@ -5,7 +5,7 @@ var bobImage;
 var TILESIZE;
 var groundGroup;
 
-var gamestate = "start";
+var gamestate = "title";
 
 var groundcheck;
 var la = 0;
@@ -64,6 +64,12 @@ function setup() {
     pin = createSprite((displayWidth - 100) / 4.58, (displayHeight - 100) / 1.4384);
     pin.addImage(pinImg);
     pin.scale = 0.2;
+    playButton = createButton("PLAY");
+    playButton.size(200, 100);
+    playButton.style("font-size", 40 + "pt");
+    playButton.style("border-radius", 25);
+    playButton.style("background-color", "gold");
+    playButton.position(width / 2 - 100, height / 2 + 200);
 }
 
 function draw() {
@@ -71,6 +77,19 @@ function draw() {
 
     if (woodCount < addWood) {
         woodCount += 1;
+    }
+
+    if (gamestate == "title") {
+        image(mountainImg, 0, 0, width, height);
+        textSize(105);
+        fill(255, 215, 0);
+        textAlign(CENTER, CENTER);
+        text("BOB'S", width / 2, height / 2 - 350);
+        text("ADVENTURES", width / 2, height / 2 - 250);
+        playButton.mousePressed(function () {
+            gamestate = "start";
+            playButton.hide();
+        })
     }
 
     if (gamestate == "start") {
