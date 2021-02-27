@@ -1,6 +1,7 @@
 class Map {
-    constructor(array) {
+    constructor(array, title) {
         this.map = array;
+        this.title = title;
 
         this.image1 = loadImage('img/ground1.png');
         this.image2 = loadImage('img/ground2.png');
@@ -14,12 +15,25 @@ class Map {
         this.enemy1Img = loadImage('img/enemy1real.png');
         this.images = [this.image1, this.image2, this.image3];
 
+        this.x = 0;
+
         this.enemies = [];
         this.materials = [];
+        this.timer = 0;
+        this.start = false;
+    }
+    showTitle() {
+        camera.zoom = 1;
+        camera.position.x = width / 2;
+        camera.position.y = height / 2;
+        console.log(this.timer);
+        background(0, 0, 0);
+        textSize(40);
+        fill(255, 215, 0);
+        this.x += 1;
+        text(this.title, width / 2 + this.x, height / 2);
     }
     loadMap() {
-        //this.map = loadStrings(this.file);
-            console.log(this.map);
             for (var i = 0; i < this.map.length; i++) {
                 for (var j = 0; j < this.map[i].length; j++) {
                     /*var pixel;
@@ -96,7 +110,6 @@ class Map {
                     }
                 }
             }
-            console.log("Drawed");
     }
 
     update() {
@@ -106,12 +119,14 @@ class Map {
         for (var j = 0; j < this.materials.length; j++) {
             this.materials[j].display();
         }
+        this.timer += 1;
     }
 
     destroy() {
         flagpoleGroup.removeSprites();
         groundGroup.removeSprites();
         enemyGroup.removeSprites();
+        materialGroup.removeSprites();
         bob.remove();
     }
 }
