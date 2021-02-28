@@ -9,3 +9,5 @@
 
 E = enemy
 W = wood
+H = Horizontal Moving Platform
+V = Vertical Moving Platform

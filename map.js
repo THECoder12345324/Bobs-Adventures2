@@ -14,11 +14,17 @@ class Map {
         this.wiggle = loadImage('img/wigglesworth.png');
         this.enemy1Img = loadImage('img/enemy1real.png');
         this.images = [this.image1, this.image2, this.image3];
+        this.moveImg = loadImage('img/heavymetal.png');
 
         this.x = 0;
 
+        this.dir = 1;
+        this.switch = 0;
+
         this.enemies = [];
         this.materials = [];
+        this.movePlatsH = [];
+        this.movePlatsV = [];
         this.timer = 0;
         this.start = false;
     }
@@ -108,16 +114,41 @@ class Map {
                         this.materials.push(wood);
                         materialGroup.add(sprite);
                     }
+                    if (this.map[i][j] == 'H') {
+                        var movePlat = createSprite(j * TILESIZE, i * TILESIZE, TILESIZE, TILESIZE);
+                        movePlat.addImage(this.moveImg);
+                        movePlat.scale = 2.4;
+                        groundGroup.add(movePlat);
+                        this.movePlatsH.push(movePlat);
+                    }
+                    if (this.map[i][j] == 'V') {
+                        var movePlat = createSprite(j * TILESIZE, i * TILESIZE, TILESIZE, TILESIZE);
+                        movePlat.addImage(this.moveImg);
+                        movePlat.scale = 2.4;
+                        groundGroup.add(movePlat);
+                        this.movePlatsV.push(movePlat);
+                    }
                 }
             }
     }
 
     update() {
+        this.switch += 1;
+        if (this.switch >= 30) {
+            this.dir *= -1;
+            this.switch = 0;
+        }
         for (var i = 0; i < this.enemies.length; i++) {
             this.enemies[i].display();
         }
         for (var j = 0; j < this.materials.length; j++) {
             this.materials[j].display();
+        }
+        for (var k = 0; k < this.movePlatsH.length; k++) {
+            this.movePlatsH[k].position.x += 5 * this.dir;
+        }
+        for (var l = 0; l < this.movePlatsV.length; l++) {
+            this.movePlatsV[l].position.y += 5 * this.dir;
         }
         this.timer += 1;
     }
