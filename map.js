@@ -27,6 +27,8 @@ class Map {
         this.movePlatsV = [];
         this.timer = 0;
         this.start = false;
+
+        this.allSprites = [];
     }
     showTitle() {
         camera.zoom = 1;
@@ -52,6 +54,7 @@ class Map {
                         ground.scale = 2.4;
                         //ground.shapeColor = "green";
                         groundGroup.add(ground);
+                            this.allSprites.push(ground);
                         console.log("Ground");
                     }
                     if (this.map[i][j] == '2') {
@@ -62,6 +65,7 @@ class Map {
                         ground.scale = 2.4;
                         //ground.shapeColor = "green";
                         groundGroup.add(ground);
+                            this.allSprites.push(ground);
                         console.log("Ground");
                     }
                     if (this.map[i][j] == '3') {
@@ -69,29 +73,34 @@ class Map {
                         pole.addImage(this.poleImg);
                         pole.scale = 2.4;
                         flagpoleGroup.add(pole);
+                            this.allSprites.push(pole);
                     }
                     if (this.map[i][j] == '4') {
                         var flag = createSprite(j * TILESIZE, i * TILESIZE, TILESIZE, TILESIZE);
                         flag.shapeColor = "black";
                         flagpoleGroup.add(flag);
+                            this.allSprites.push(flag);
                     }
                     if (this.map[i][j] == '5') {
                         var bottom = createSprite(j * TILESIZE, i * TILESIZE, TILESIZE, TILESIZE);
                         bottom.addImage(this.left);
                         bottom.scale = 2.4;
                         groundGroup.add(bottom);
+                            this.allSprites.push(bottom);
                     }
                     if (this.map[i][j] == '6') {
                         var bottom = createSprite(j * TILESIZE, i * TILESIZE, TILESIZE, TILESIZE);
                         bottom.addImage(this.middle);
                         bottom.scale = 2.4;
                         groundGroup.add(bottom);
+                            this.allSprites.push(bottom);
                     }
                     if (this.map[i][j] == '7') {
                         var bottom = createSprite(j * TILESIZE, i * TILESIZE, TILESIZE, TILESIZE);
                         bottom.addImage(this.right);
                         bottom.scale = 2.4;
                         groundGroup.add(bottom);
+                            this.allSprites.push(bottom);
                     }
                     if (this.map[i][j] == '8') {
                         var flag = createSprite(j * TILESIZE, i * TILESIZE, TILESIZE, TILESIZE);
@@ -100,11 +109,13 @@ class Map {
                         imge.scale = 0.5;
                         flag.shapeColor = "black";
                         flagpoleGroup.add(flag);
+                            this.allSprites.push(flag);
                     }
                     if (this.map[i][j] == 'E') {
                         var enemy = new Enemy(j * TILESIZE, i * TILESIZE, this.enemy1Img, 1);
                         enemy.display();
                         this.enemies.push(enemy);
+                            this.allSprites.push(enemy);
                     }
                     if (this.map[i][j] == 'W') {
                         var sprite = createSprite(j * TILESIZE, i * TILESIZE, TILESIZE, TILESIZE);
@@ -113,6 +124,7 @@ class Map {
                         wood.display();
                         this.materials.push(wood);
                         materialGroup.add(sprite);
+                            this.allSprites.push(sprite);
                     }
                     if (this.map[i][j] == 'H') {
                         var movePlat = createSprite(j * TILESIZE, i * TILESIZE, TILESIZE, TILESIZE);

@@ -54,6 +54,7 @@ function preload() {
                                     "img/run3l.png", "img/run4l.png", 
                                     "img/run5l.png", "img/run6l.png", 
                                     "img/run7l.png", "img/run8l.png");
+    crouching = loadAnimation("img/crouch1.png")
     bobImage = loadAnimation("img/bob.png");
 
     world1 = loadImage("img/world-1-2.png");
@@ -218,11 +219,12 @@ function draw() {
             if (answered1 == false) {
                 fill(255, 215, 0);
                 rectMode(CENTER);
-                rect(pin.x, pin.y - height / 8, width / 2, height / 16, 25);
+                rect(pin.x, pin.y - height / 5, width / 4, height / 8, 25);
+                fill(0, 0, 0);
                 textAlign(CENTER);
-                text("Now it's time to decide which path to take", width / 2, height / 20);
-                text("Press 1 if you want to take a bonus path (RISKIER, but greater REWARD)", width / 2, height / 15);
-                text("Press 2 if you want to continue on the normal path", width / 3, height / 10);
+                text("Now it's time to decide which path to take", pin.x, pin.y - height / 5);
+                text("Press 1 if you want to take a bonus path (RISKIER, but greater REWARD)", pin.x, pin.y - height / 6);
+                text("Press 2 if you want to continue on the normal path", pin.x, pin.y - height / 7);
                 if (keyDown('1')) {
                     answered1 = true;
                     bonus1 = true;
