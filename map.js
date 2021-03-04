@@ -29,6 +29,8 @@ class Map {
         this.start = false;
 
         this.allSprites = [];
+
+        this.score = '';
     }
     showTitle() {
         camera.zoom = 1;
@@ -46,6 +48,17 @@ class Map {
                 for (var j = 0; j < this.map[i].length; j++) {
                     /*var pixel;
                     pixel = line.splice(j, 1);*/
+                    if (this.map[i][j] == 'P') {
+                        bob = createSprite(j * TILESIZE, i * TILESIZE, 40, 40);
+                        var scl = (width / height) / 2;
+                        bob.addAnimation("crouching", crouching);
+                        bob.addAnimation("runningright", runrightAnimation);
+                        bob.addAnimation("runningleft", runleftAnimation);
+                        bob.addAnimation("standing", bobImage);
+                        bob.scale = 1 * scl;
+                    
+                        bob.setCollider("rectangle", 0, 0, bob.width - 30, bob.height);
+                    }
                     if (this.map[i][j] == '1') {
                         var ground = createSprite(j * TILESIZE, i * TILESIZE, TILESIZE, TILESIZE);
                         var x = random(0, 2);
@@ -125,6 +138,17 @@ class Map {
                         this.materials.push(wood);
                         materialGroup.add(sprite);
                             this.allSprites.push(sprite);
+                        this.score = 'W';
+                    }
+                    if (this.map[i][j] == 'G') {
+                        var sprite = createSprite(j * TILESIZE, i * TILESIZE, TILESIZE, TILESIZE);
+                        sprite.visible = false;
+                        var gold = new Material('G', j * TILESIZE, i * TILESIZE, TILESIZE, TILESIZE);
+                        gold.display();
+                        this.materials.push(gold);
+                        materialGroup.add(sprite);
+                            this.allSprites.push(sprite);
+                        this.score = 'G';
                     }
                     if (this.map[i][j] == 'H') {
                         var movePlat = createSprite(j * TILESIZE, i * TILESIZE, TILESIZE, TILESIZE);
